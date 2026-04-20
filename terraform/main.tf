@@ -6,8 +6,8 @@ provider "aws" {
 resource "aws_lambda_function" "lambda-python-ci-cd-pipeline" {
   function_name = "${var.project-name}-function"
   role          = aws_iam_role.lambda_role.arn
-  handler       = "app.handler"
-  runtime       = "python3.14"
+  handler       = "handler.lambda_handler"
+  runtime       = "python3.11"
 
   filename         = data.archive_file.lambda_function.output_path
   source_code_hash = data.archive_file.lambda_function.output_base64sha256
@@ -37,8 +37,8 @@ resource "aws_iam_role_policy_attachment" "lambda_policy_attachment" {
 
 data "archive_file" "lambda_function" {
   type        = "zip"
-  source_dir  = "${path.root}../lambda"
-  output_path = "${path.root}/lambda_function.zip"
+  source_dir  = "${path.module}../lambda"
+  output_path = "${path.module}/lambda_function.zip"
 }
 
 output "lambda_function_arn" {
