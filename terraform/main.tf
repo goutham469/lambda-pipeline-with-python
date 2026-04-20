@@ -9,8 +9,8 @@ resource "aws_lambda_function" "lambda-python-ci-cd-pipeline" {
   handler       = "handler.lambda_handler"
   runtime       = "python3.11"
 
-  filename         = data.archive_file.lambda_function.output_path
-  source_code_hash = data.archive_file.lambda_function.output_base64sha256
+  filename         = "${path.module}/../lambda.zip"
+  source_code_hash = filebase64sha256("${path.module}/../lambda.zip")
 }
 
 resource "aws_iam_role" "lambda_role" {
@@ -35,11 +35,6 @@ resource "aws_iam_role_policy_attachment" "lambda_policy_attachment" {
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
 }
 
-data "archive_file" "lambda_function" {
-  type        = "zip"
-  source_dir  = "${path.root}../lambda"
-  output_path = "${path.module}/lambda.zip"
-}
 
 output "lambda_function_arn" {
   value = aws_lambda_function.lambda-python-ci-cd-pipeline.arn
