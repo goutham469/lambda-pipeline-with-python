@@ -1,0 +1,20 @@
+.terraform/
+.terraform/*
+
+// terraform directories
+*.tfstate
+*.tfstate.backup
+.terraform.lock.hcl
+
+# Python virtual environments
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.env
+
+# Compiled Python files
+*.py[cod]
+
+# Lambda deployment artifacts
+lambda.zip
