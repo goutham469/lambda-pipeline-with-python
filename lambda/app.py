@@ -6,7 +6,7 @@ app = flask.Flask(__name__)
 
 @app.route('/')
 def hello():
-    return "Hello, World!"
+    return "Hello, World 123 from AWS Lambda!"
 
 @app.route("/add", methods=["POST"])
 def add():
