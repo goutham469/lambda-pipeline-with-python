@@ -39,3 +39,7 @@ resource "aws_iam_role_policy_attachment" "lambda_policy_attachment" {
 output "lambda_function_arn" {
   value = aws_lambda_function.lambda-python-ci-cd-pipeline.arn
 }
+
+output "lambda_function_invocation_url" {
+  value = aws_lambda_function.lambda-python-ci-cd-pipeline.invoke_arn
+}
