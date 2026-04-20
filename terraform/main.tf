@@ -38,7 +38,7 @@ resource "aws_iam_role_policy_attachment" "lambda_policy_attachment" {
 data "archive_file" "lambda_function" {
   type        = "zip"
   source_dir  = "${path.module}../lambda"
-  output_path = "${path.module}/lambda_function.zip"
+  output_path = "${path.module}/lambda.zip"
 }
 
 output "lambda_function_arn" {
